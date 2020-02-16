@@ -14,6 +14,8 @@
         <th scope="col">Email</th>
         <th scope="col">Project</th>
         <th scope="col">Git</th>
+        <th scope="col">Created at</th>
+        <th scope="col">Updated at</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -26,19 +28,24 @@
         <td>{{ $list->email }}</td>
         <td>{{ $list->project }}</td>
         <td>{{ $list->git }}</td>
+        <td>{{ $list->created_at->diffForHumans()}}</td>
+        <td>{{ $list->updated_at}}</td>
         <td>
-          <a href="#" class="btn-sm btn-primary">EDIT</a>
-          <a href="#" class="btn-sm btn-danger">DELETE</a>
+          <a href="{{url('information/list')}}/{{$list->id}}" class="btn-sm btn-primary">EDIT</a>
+          <a href="{{url('information/delete')}}/{{$list->id}}" class="btn-sm btn-danger">DELETE</a>
         </td>
       </tr>
 
       @empty
-      <h1>No Data</h1>
+      <tr>
+        <td>No data available</td>
+      </tr>
     @endforelse
     </tbody>
   </table>
 
-  {{ $lists->links() }}
+
+{{$lists->links()}}
 
 
 
