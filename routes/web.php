@@ -25,6 +25,9 @@ Route::post('/information/update', 'InformationController@information_update')->
 Route::get('/information/delete/{user_id}', 'InformationController@information_delete')->name('information_delete');
 // InformationController END
 
+
+
+// ProductController
 Route::get('/product', 'ProductController@index')->name('add_product');
 Route::post('/product/submit', 'ProductController@product_insert')->name('product_submit');
 Route::get('/product/list', 'ProductController@product_list')->name('product_list');
@@ -34,12 +37,13 @@ Route::get('/product/delete/{product_id}', 'ProductController@product_delete')->
 Route::get('/product/category', 'ProductController@product_category')->name('product_category');
 Route::post('/product/categoryadd', 'ProductController@add_category')->name('add_category');
 Route::get('/product/categorydelete/{category_id}', 'ProductController@delete_category')->name('category_delete');
-
-// ProductController
-
-
-
+Route::get('/product/restore/{product_id}', 'ProductController@product_restore')->name('product_restore');
+Route::get('/product/hardDelete/{product_id}', 'ProductController@product_hDelete')->name('product_hDelete');
 //ProductController END
+
+
+
+
 
 Auth::routes();
 

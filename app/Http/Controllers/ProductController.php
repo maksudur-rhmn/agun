@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use Carbon\Carbon;
 use App\ProductCategory;
+use App\Http\Requests\ProductFormPost;
 
 class ProductController extends Controller
 {
@@ -15,7 +16,7 @@ class ProductController extends Controller
     return view('products.index', compact('categories'));
   }
 
-  function product_insert(Request $request)
+  function product_insert(ProductFormPost $request)
   {
     Product::insert([
       'product_name'  =>$request->product_name,
@@ -29,7 +30,8 @@ class ProductController extends Controller
   function product_list()
   {
     $lists = Product::all();
-    return view('products.list', compact('lists'));
+    $trashed_products = Product::onlyTrashed()->get();
+    return view('products.list', compact('lists', 'trashed_products'));
   }
   function product_edit($product_id)
   {
@@ -50,6 +52,16 @@ class ProductController extends Controller
   {
    Product::findOrFail($product_id)->delete();
    return back();
+  }
+  function product_restore($product_id)
+  {
+   Product::withTrashed()->where('id', $product_id)->restore();
+   return back()->withSuccess('Product restored');
+  }
+  function product_hDelete($product_id)
+  {
+    Product::withTrashed()->where('id', $product_id)->forceDelete();
+    return back()->withDelete('Product permanently deleted');
   }
 
   // Category
