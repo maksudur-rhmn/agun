@@ -26,8 +26,15 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                   Laravel
                 </a>
-                <a class="nav-link" href="{{ route('information_list') }}">Users</a>
-                <a class="nav-link" href="{{ route('product_list') }}">Products</a>
+                @auth
+                  @if(Auth::user()->role_id == 1)
+                  <a class="nav-link" href="{{ route('information_list') }}">Users</a>
+                  <a class="nav-link" href="{{ route('product_list') }}">Products</a>
+                @else
+                    <a class="nav-link" href="{{ route('product_list') }}">Products</a>
+                @endif
+                @endauth
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

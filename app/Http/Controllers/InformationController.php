@@ -8,6 +8,11 @@ use Carbon\Carbon;
 
 class InformationController extends Controller
 {
+   function __construct()
+   {
+     $this->middleware('auth');
+     $this->middleware('role');
+   }
    function index ()
    {
      return view('informations.index');

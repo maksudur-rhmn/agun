@@ -19,7 +19,7 @@ Route::get('/contact', 'FrontendController@contact');
 // InformationController
 Route::get('/information', 'InformationController@index');
 Route::post('/information/create', 'InformationController@create')->name('information_create');
-Route::get('/information/list', 'InformationController@information_list')->name('information_list');
+Route::get('/information/list', 'InformationController@information_list')->middleware('password.confirm')->name('information_list');
 Route::get('/information/list/{user_id}', 'InformationController@individual_user')->name('individual_user');
 Route::post('/information/update', 'InformationController@information_update')->name('information_update');
 Route::get('/information/delete/{user_id}', 'InformationController@information_delete')->name('information_delete');

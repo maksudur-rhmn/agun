@@ -10,6 +10,10 @@ use App\Http\Requests\ProductFormPost;
 
 class ProductController extends Controller
 {
+  function __construct()
+  {
+    $this->middleware('auth');
+  }
   function index()
   {
     $categories = ProductCategory::all();
